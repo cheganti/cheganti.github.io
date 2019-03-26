@@ -14,8 +14,45 @@
 
     <div class="container">
         <div class="row jumbotron text-center">
-           <h1>Test</h1>
-           </div> 
+           
+            <div class="col col-sm-2">
+                Select Channel:
+            </div>
+            <div class="col col-sm-4">
+
+                <select id="apiUrl" onchange="changeUrl(value)" class="form-control">
+                    <option>Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-deck" id="card-deck">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title link-card" onclick="changeUrl('CNBC')">CNBC Channel</h4>
+                    <!-- <input type="button" onclick="changeUrl('CNBC')" value="CNBC" class="btn btn-primary"> -->
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title link-card" onclick="changeUrl('mashable')">MASHABLE Channel</h4>
+                    <!-- <input type="button" onclick="changeUrl('mashable')" value="mashable" class="btn btn-primary"> -->
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title link-card" onclick="changeUrl('bbc-news')">BBC-news Channel</h4>
+                    <!-- <input type="button" onclick="changeUrl('bbc-news')" value="bbc-news" class="btn btn-primary"> -->
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title link-card" onclick="changeUrl('cnn')">CNN Channel</h4>
+                    <!-- <input type="button" onclick="changeUrl('cnn')" value="cnn" class="btn btn-primary"> -->
+                </div>
+            </div>
+        </div>
+        <div id="root">
+        </div>
     </div>
 
     <script src="script.js"></script>

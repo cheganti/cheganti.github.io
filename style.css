@@ -1,0 +1,84 @@
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.link-card{
+  cursor: pointer;
+}
+.container1 {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card.mb-4{
+  border: 3px solid gray;
+}
+.card {
+  margin: 1rem;
+  border: 1px solid gray;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+p.txtcolor{
+font-size: 16px;
+font-weight: bold;
+line-height: 26px;
+}
+.card h1,h3,h2,.txtcolor {
+  background: #39c2d7;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.card p, h1, h3, h2, span, a {
+  padding-left: 10px;
+}
+
+@media screen and (min-width: 600px) {
+  .card {
+    flex: 1 1 calc(50% - 2rem);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .card {
+    flex: 1 1 calc(33% - 2rem);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+}
+
+.newsUrlDiv{
+  padding: 10px;
+}
+
+.newsUrlDiv span, a, .bold span {
+  padding: 0;
+}
+.bold{
+  font-weight: bold;
+}
+.normal{
+  font-weight: normal;
+}
+
+.card-body {
+  background: #39c2d7;
+  color: #ffffff;
+}
+.container {
+  background: #e9ecef;
+}
+
+select.form-control{
+  text-transform: capitalize;
+}
