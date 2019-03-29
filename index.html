@@ -12,13 +12,50 @@
 
 <body>
 
-    <div class="container">
+    <div class="container" id="container">
         <div class="row jumbotron text-center">
-           <h1>Test</h1>
-           </div> 
+
+            <div class="col col-sm-2">
+                Select Channel:
+            </div>
+            <div class="col col-sm-4">
+
+                <select id="apiUrl" class="form-control">
+                    <option>Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-deck" id="card-deck">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title link-card" title="CNBC" data-source="CNBC">CNBC Channel</h4>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title link-card"  title="mashable">MASHABLE Channel</h4>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title link-card"  title="bbc-news">BBC-news Channel</h4>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title link-card"  title="cnn">CNN Channel</h4>
+                </div>
+            </div>
+        </div>
+        <div id="root">
+        </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        let createNews = new NewsFeed();
+        createNews.load();
+    </script>
 </body>
 
 </html>
