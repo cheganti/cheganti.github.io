@@ -1,4 +1,5 @@
 import  { domCreator } from './createDom';
+import {fetch as fetchPolyfill} from 'whatwg-fetch'
 export function getNews(newsUrl) {
     let spinner = document.querySelector(".spinner"); //Spinner to show when fetching api data
     spinner.style.display = 'block'; //Spinner
@@ -6,7 +7,7 @@ export function getNews(newsUrl) {
     document.getElementById('card-deck').style.display = 'none';
     const API_KEY = "172bf5976fff458cbf68f242df25671f";
     const base_url = `https://newsapi.org/v1/articles?source=`;
-    const api = (source) => fetch(base_url + source + '&' + 'apiKey=' + API_KEY);
+    const api = (source) => fetchPolyfill(base_url + source + '&' + 'apiKey=' + API_KEY);
     let url = `https://newsapi.org/v1/articles?source=${newsUrl}&apiKey=172bf5976fff458cbf68f242df25671f`;
     api(newsUrl)
         .then(resp => resp.json())

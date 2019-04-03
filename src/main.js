@@ -1,5 +1,5 @@
 import { fetch } from 'whatwg-fetch';
-import { newsOptions } from './options';
+import { NewsSources } from './newsSource';
 import { handleEvents } from './handleEvents'
 
 class NewsArtiles {
@@ -9,7 +9,8 @@ class NewsArtiles {
         container.setAttribute('class', 'container1');
         container.setAttribute('id', 'container1');
         app.appendChild(container);
-        newsOptions();
+        const newsCategories = new NewsSources();
+        newsCategories.getNewsChannelCategories();
         handleEvents();
     }
 }
