@@ -1,6 +1,7 @@
-import { fetch } from 'whatwg-fetch';
-import { NewsSources } from './newsSource';
-import { handleEvents } from './handleEvents'
+import 'whatwg-fetch';
+import '@babel/polyfill';
+import { handleEvents } from './Components/handleEvents';
+import { ChannelsList } from './Components/Channels/ChannelsList';
 
 class NewsArtiles {
     constructor() {
@@ -9,8 +10,8 @@ class NewsArtiles {
         container.setAttribute('class', 'container1');
         container.setAttribute('id', 'container1');
         app.appendChild(container);
-        const newsCategories = new NewsSources();
-        newsCategories.getNewsChannelCategories();
+        const channelsList = new ChannelsList();
+        channelsList.showChannels();
         handleEvents();
     }
 }

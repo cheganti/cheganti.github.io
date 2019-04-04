@@ -1,5 +1,5 @@
 //Create the dom after fetching the api call
-export class domCreator {
+export class NewsArticle {
     createNode(element) {
         return document.createElement(element);
     }
