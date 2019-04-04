@@ -14,16 +14,16 @@ export class domCreator {
 
     createDom(news) {
         const container = document.getElementById('container1');
-        let card = this.createNode('div'),
-            par = this.createNode('p'),
-            pDesc = this.createNode('p'),
-            pPublisedP = this.createNode('p'),
-            pPublishedAt = this.createNode('span'),
-            imgAnchor = this.createNode('a'),
-            imgurlToImage = this.createNode('img'),
-            newsUrl = this.createNode('a'),
-            newsUrlDiv = this.createNode('div'),
-            newsUrlspan = this.createNode('span');
+        let card = this.createNode('div');
+        let par = this.createNode('p');
+        let pDesc = this.createNode('p');
+        let pPublisedP = this.createNode('p');
+        let pPublishedAt = this.createNode('span');
+        let imgAnchor = this.createNode('a');
+        let imgurlToImage = this.createNode('img');
+        let newsUrl = this.createNode('a');
+        let newsUrlDiv = this.createNode('div');
+        let newsUrlspan = this.createNode('span');
 
         this.setattribute(card, 'class', 'card');
         this.setattribute(par, 'class', 'txtcolor');
