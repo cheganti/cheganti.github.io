@@ -1,14 +1,22 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 
 module.exports = {
     entry: {
-        app: './src/main.js'
+        app: './src/main.js',
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+          title: 'My App',
+          filename: 'index.html'
+        })
+      ],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        chunkFilename: '[name].bundle.js'
     },
-    mode: 'development',
+    // mode: 'development',
     module: {
         rules: [
             {

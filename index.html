@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet" />
-    <script>
-        
-    </script>
 </head>
 
 <body>
@@ -27,19 +24,10 @@
                       <i class="fa fa-bars"></i>
                     </a>
         </div>
-        <div class="row jumbotron text-center">
-
-            <div class="col col-sm-2">
-                Select Channel:
-            </div>
-            <div class="col col-sm-4">
-
-                <select id="apiUrl" class="form-control">
-                     <option>Select</option>
-                 </select>
-            </div>
+        <div id="ddlContainer">
         </div>
-        <div class="card-deck" id="card-deck">
+        <div class="card-deck" id="card-deck"></div>
+        <!-- <div class="card-deck" id="card-deck">
             <div class="card mb-4">
                 <div class="card-body">
                     <h4 class="card-title link-card" title="CNBC" data-source="CNBC">CNBC Channel</h4>
@@ -60,7 +48,7 @@
                     <h4 class="card-title link-card" title="cnn">CNN Channel</h4>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div id="root">
             <div class="spinner"></div>
         </div>

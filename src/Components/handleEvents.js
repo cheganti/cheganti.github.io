@@ -1,10 +1,11 @@
 // Handle events on selecting the channels
-import { getNewsArticles } from './ApiService/newsApiService';
+import { getNewsArticles } from '../Services/newsApiService';
 import { bindNewsToDOM } from './News/newsArticlesList';
 
 export function handleEvents() {
-    const channelFilter = document.getElementById('apiUrl');
+    const channelFilter = document.getElementById('selectChannelId');
     const buttonFilter = document.getElementsByClassName('card-title');
+    console.log("channelFilter:", channelFilter);
     channelFilter.addEventListener('change', (e) => {
         if (e.target.tagName === 'SELECT' && e.target.value !== 'Select') {
             getNewsArticles(e.target.value).
