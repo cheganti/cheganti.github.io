@@ -1,27 +1,36 @@
 import 'whatwg-fetch';
 import '@babel/polyfill';
-import { handleEvents } from './Components/handleEvents';
+import { EventsHandler } from './Components/eventsHandler';
 import { ChannelsList } from './Components/Channels/ChannelsList';
 
-class NewsArtiles {
+class NewsArtilesChannel {
     constructor() {
         const app = document.getElementById('root');
         const container = document.createElement('div');
         container.setAttribute('class', 'container1');
         container.setAttribute('id', 'container1');
-        app.appendChild(container);
-        const channelsList = new ChannelsList();
-        channelsList.showChannels();
+
+        const seleCol = document.createElement('div');
+        seleCol.setAttribute('class', 'col-4');
+
         const ddlContainer = document.getElementById('ddlContainer');
         const ddl = document.createElement('select');
         ddl.setAttribute('class', 'form-control');
         ddl.setAttribute('id', 'selectChannelId');
-        ddlContainer.appendChild(ddl);
-        handleEvents();
+        
+        app.appendChild(container);
+        ddlContainer.appendChild(seleCol);
+        seleCol.appendChild(ddl);
+        
+        const channelsList = new ChannelsList();
+        channelsList.showChannels();
+        
+        const eventsHandler = new EventsHandler();
+        eventsHandler.handleEvents();
     }
 }
-export default NewsArtiles;
-new NewsArtiles();
+export default NewsArtilesChannel;
+new NewsArtilesChannel();
 
 
 

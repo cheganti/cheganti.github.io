@@ -7,10 +7,10 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-          title: 'My App',
-          filename: 'index.html'
+            title: 'My App',
+            filename: 'index.html'
         })
-      ],
+    ],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -27,6 +27,14 @@ module.exports = {
                 query: {
                     presets: ['@babel/env']
                 }
+            },
+            {
+                test: /\.css$/,
+                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     },
