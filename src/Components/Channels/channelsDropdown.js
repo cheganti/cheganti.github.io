@@ -1,4 +1,3 @@
-
 export class ChannelsDropdown {
     bindOptions(channels) {
         const select = document.getElementById("selectChannelId");

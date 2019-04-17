@@ -1,11 +1,20 @@
 import { API_KEY, base_url } from '../Constants/applicationConstants';
-export async function getNewsArticles(channelCode) {
-    let url = `${base_url}${channelCode}&apiKey=${API_KEY}`;
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data.articles;
-    } catch{
-        return 'Error while getting the data';
+import { ErrorHandlers } from '../ErrorHandlers/errorHandlers';
+export class NewsApiService{
+    async getNewsArticles(channelCode) {
+        const errorHandlers = new ErrorHandlers();
+        let url = `${base_url}${channelCode}&apiKey=${API_KEY}`;
+        try {
+            const response = await fetch(url);
+            return await response.json();
+           
+        }catch(err){
+            errorHandlers.handleErrors(err);
+        }
     }
 }
+
+
+
+
+

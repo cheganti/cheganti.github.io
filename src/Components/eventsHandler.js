@@ -1,5 +1,5 @@
 // Handle events on selecting the channels
-import { getNewsArticles } from '../Services/newsApiService';
+import { NewsApiService } from '../Services/newsApiService';
 import { BindNews } from './News/newsArticlesList';
 
 export class EventsHandler {
@@ -10,19 +10,22 @@ export class EventsHandler {
         const channelFilter = document.getElementById('selectChannelId');
         const buttonFilter = document.getElementsByClassName('card-title');
         const bindNews = new BindNews();
+        const newsApiService = new NewsApiService();
         channelFilter.addEventListener('change', (e) => {
             if (e.target.tagName === 'SELECT' && e.target.value !== 'Select') {
-                getNewsArticles(e.target.value).
-                    then(newsArticles => {
-                        bindNews.bindNewsToDOM(newsArticles);
+                newsApiService.getNewsArticles(e.target.value).
+                    then(({articles}) => {
+                        console.log(articles);
+                        bindNews.bindNewsToDOM(articles);
                     });
+                   
             }
         });
 
         for (let i = 0; i < buttonFilter.length; i++) {
             buttonFilter[i].addEventListener('click', (e) => {
                 if (e.target.tagName === 'H4') {
-                    getNewsArticles(e.target.title).
+                    newsApiService.getNewsArticles(e.target.title).
                         then(newsArticles => {
                             bindNews.bindNewsToDOM(newsArticles);
                         });
