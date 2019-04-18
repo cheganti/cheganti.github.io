@@ -1,7 +1,5 @@
-export class ErrorHandlers {
-    constructor() {
-    }
-    handleErrors(error) {
+export class ErrorHandler {
+    static handleErrors(error) {
         let errorMessage = '';
         if (error.error instanceof ErrorEvent) {
             // client-side error

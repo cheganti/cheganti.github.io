@@ -1,20 +1,17 @@
 // Options for the select.
-import { ErrorHandlers } from '../ErrorHandlers/errorHandlers';
+import { ErrorHandler } from '../ErrorHandlers/errorHandlers';
+import { api } from './Api';
+
 export class ChannelsApiService {
     constructor() {
         this.sourcesAPI = 'https://newsapi.org/v1/sources';
     }
     async getNewsChannelCategories() {
-        const errorHandlers = new ErrorHandlers();
-        // errorHandlers.handleErrors("Hello"); 
         try {
-            const response = await fetch(this.sourcesAPI);
+            const response = await api.get(this.sourcesAPI);
             return await response.json();
         } catch (err) {
-            errorHandlers.handleErrors(err);
+            ErrorHandler.handleErrors(err);
         }
     }
-
 }
-
-
