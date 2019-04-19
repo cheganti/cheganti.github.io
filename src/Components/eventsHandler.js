@@ -15,7 +15,7 @@ export class EventsHandler {
             if (e.target.tagName === 'SELECT' && e.target.value !== 'Select') {
                 newsApiService.getNewsArticles(e.target.value).
                     then(({articles}) => {
-                        console.log(articles);
+                        // console.log(articles);
                         bindNews.bindNewsToDOM(articles);
                     });
                    

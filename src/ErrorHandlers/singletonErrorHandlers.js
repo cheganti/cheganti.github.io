@@ -1,5 +1,14 @@
 export class ErrorHandler {
-    static handleErrors(error) {
+    constructor(){
+        if(!ErrorHandler.instance){
+            ErrorHandler.instance = this;
+            console.log("Inside IF");
+        }
+        console.log("Outside IF");
+        return ErrorHandler.instance;
+       }
+
+    handleErrors(error) {
         let errorMessage = '';
         if (error.error instanceof ErrorEvent) {
             // client-side error

@@ -1,5 +1,5 @@
 import { API_KEY, base_url } from '../Constants/applicationConstants';
-import { ErrorHandler } from '../ErrorHandlers/errorHandlers';
+import { ErrorHandler } from '../ErrorHandlers/singletonErrorHandlers';
 import { api } from './Api';
 import ApiProxy from './ApiProxy';
 export class NewsApiService {
@@ -11,7 +11,7 @@ export class NewsApiService {
             return await response.json();
 
         } catch (err) {
-            ErrorHandler.handleErrors(err);
+            new ErrorHandler().handleErrors(err);
         }
     }
 }

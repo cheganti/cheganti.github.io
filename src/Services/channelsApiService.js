@@ -1,5 +1,5 @@
 // Options for the select.
-import { ErrorHandler } from '../ErrorHandlers/errorHandlers';
+import { ErrorHandler } from '../ErrorHandlers/singletonErrorHandlers';
 import { api } from './Api';
 
 export class ChannelsApiService {
@@ -11,7 +11,7 @@ export class ChannelsApiService {
             const response = await api.get(this.sourcesAPI);
             return await response.json();
         } catch (err) {
-            ErrorHandler.handleErrors(err);
+            new ErrorHandler().handleErrors(err);
         }
     }
 }
