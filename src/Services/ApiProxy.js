@@ -1,4 +1,4 @@
-import { api } from './Api'
+import { api } from './Apicall'
 export default class ApiProxy {
     constructor() {
     }

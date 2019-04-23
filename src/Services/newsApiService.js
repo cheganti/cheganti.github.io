@@ -1,6 +1,6 @@
 import { API_KEY, base_url } from '../Constants/applicationConstants';
 import { ErrorHandler } from '../ErrorHandlers/singletonErrorHandlers';
-import { api } from './Api';
+import { api } from './Apicall';
 import ApiProxy from './ApiProxy';
 export class NewsApiService {
     async getNewsArticles(channelCode) {

@@ -1,6 +1,6 @@
 // Options for the select.
 import { ErrorHandler } from '../ErrorHandlers/singletonErrorHandlers';
-import { api } from './Api';
+import { RequestFactory } from './Factory';
 
 export class ChannelsApiService {
     constructor() {
@@ -8,8 +8,11 @@ export class ChannelsApiService {
     }
     async getNewsChannelCategories() {
         try {
-            const response = await api.get(this.sourcesAPI);
+            // const response = await api.get(this.sourcesAPI);
+            const apiFactory = new RequestFactory();
+            const response = await apiFactory.create("GET", this.sourcesAPI);
             return await response.json();
+
         } catch (err) {
             new ErrorHandler().handleErrors(err);
         }
