@@ -1,6 +1,7 @@
 // Options for the select.
 import { ErrorHandler } from '../ErrorHandlers/singletonErrorHandlers';
-import { RequestFactory } from './Factory';
+import { requestFactory } from './Factory';
+import ApiProxy from './ApiProxy';
 
 export class ChannelsApiService {
     constructor() {
@@ -8,10 +9,8 @@ export class ChannelsApiService {
     }
     async getNewsChannelCategories() {
         try {
-            // const response = await api.get(this.sourcesAPI);
-            const apiFactory = new RequestFactory();
-            const response = await apiFactory.create("GET", this.sourcesAPI);
-            return await response.json();
+            const apiProxy = await new ApiProxy("GET", this.sourcesAPI);
+            return apiProxy.json();
 
         } catch (err) {
             new ErrorHandler().handleErrors(err);

@@ -1,29 +1,7 @@
-class GetApi {
-  constructor(url) {
-  }
-
-  request(url, method, body) {
-    return fetch(url);
-  }
-}
-
-class PostApi {
-  constructor(url) {
-  }
-  request(url, method, body) {
-    return fetch(url);
-  }
-}
-
-class PutApi {
-  constructor(url) {
-  }
-  request(url, method, body) {
-    return fetch(url);
-  }
-}
-
-export class RequestFactory {
+import { GetApi } from './GetApi'
+import { PostApi } from './PostApi'
+import { PutApi } from './PutApi'
+class RequestFactory {
   constructor() {
   }
   create(type, url) {
@@ -36,5 +14,4 @@ export class RequestFactory {
   }
 
 };
-
-
+export const factoryRequest = new RequestFactory("");
