@@ -6,12 +6,11 @@ class RequestFactory {
   }
   create(type, url) {
     if (type === "GET")
-      return new GetApi().request(url);
+      return new GetApi();
     if (type === "POST")
-      return new PostApi(url).request(url);
+      return new PostApi(url);
     if (type === "PUT")
-      return new PutApi(url).request(url);
+      return new PutApi(url);
   }
-
 };
 export const factoryRequest = new RequestFactory("");
