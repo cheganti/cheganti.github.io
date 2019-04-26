@@ -1,10 +1,8 @@
-import { GetApi } from './GetApi'
-import { PostApi } from './PostApi'
-import { PutApi } from './PutApi'
-class RequestFactory {
-  constructor() {
-  }
-  create(type, url) {
+import { GetApi } from './GetApi';
+import { PostApi } from './PostApi';
+import { PutApi } from './PutApi';
+export class RequestFactory {
+ static create(type, url) {
     if (type === "GET")
       return new GetApi();
     if (type === "POST")
@@ -13,4 +11,3 @@ class RequestFactory {
       return new PutApi(url);
   }
 };
-export const factoryRequest = new RequestFactory("");
