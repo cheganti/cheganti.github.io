@@ -4,7 +4,7 @@ import { PutApi } from './PutApi';
 export class RequestFactory {
  static create(type, url) {
     if (type === "GET")
-      return new GetApi();
+      return new GetApi(url);
     if (type === "POST")
       return new PostApi(url);
     if (type === "PUT")

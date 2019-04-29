@@ -6,7 +6,7 @@ export class NewsApiService {
     async getNewsArticles(channelCode) {
         let url = `${base_url}${channelCode}&apiKey=${API_KEY}`;
         try {
-            const apiInst = RequestFactory.create("GET", url);
+            const apiInst = RequestFactory.create('GET', url);
             const getApiProxy = new ApiProxy(apiInst);
             const data = await getApiProxy.request(url);
             return await data.json();

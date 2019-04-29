@@ -3,4 +3,3 @@ export class GetApi {
       return fetch(url);
     }
   }
-  export const api = new GetApi();
