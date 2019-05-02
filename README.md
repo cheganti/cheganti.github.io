@@ -109,3 +109,26 @@ switched to db frontcamp
 	{ "name" : "Elena'S Restuarant" }
 
 5) What are _id and borough of “Seafood” (cuisine) restaurants which received at least one “B” grade in period from 2014-02-01 to 2014-03-01? Use projection to include only _id and borough.
+
+#### Query: db.restaurants.find({ $and: [{ "cuisine": "Seafood" }, { "grades.grade": "B" }, { "grades.date": { $gt: ISODate("2014-02-01"), $lt: ISODate("2014-03-01") } }] },{_id: 1, borough: 1});
+#### Result:
+{ "_id" : ObjectId("5ccaab62eb13dff3397783a9"), "borough" : "Queens" }
+{ "_id" : ObjectId("5ccaab62eb13dff3397783af"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff3397783e1"), "borough" : "Bronx" }
+{ "_id" : ObjectId("5ccaab62eb13dff33977845e"), "borough" : "Bronx" }
+{ "_id" : ObjectId("5ccaab62eb13dff3397784d1"), "borough" : "Brooklyn" }
+{ "_id" : ObjectId("5ccaab62eb13dff3397787c2"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff339778b56"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff339778c79"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff339778e02"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff339778ef5"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff339778f56"), "borough" : "Brooklyn" }
+{ "_id" : ObjectId("5ccaab62eb13dff339778f7c"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff339779242"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff339779293"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff3397792be"), "borough" : "Queens" }
+{ "_id" : ObjectId("5ccaab62eb13dff33977932f"), "borough" : "Brooklyn" }
+{ "_id" : ObjectId("5ccaab62eb13dff33977939c"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff3397796f7"), "borough" : "Manhattan" }
+{ "_id" : ObjectId("5ccaab62eb13dff339779b34"), "borough" : "Queens" }
+{ "_id" : ObjectId("5ccaab62eb13dff339779c33"), "borough" : "Queens" }
