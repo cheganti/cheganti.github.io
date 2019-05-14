@@ -1,5 +1,5 @@
 
-###  # **MongoDB Task1**
+MongoDB Task1
 1) How many “Chinese” (cuisine) restaurants are in “Queens” (borough)?
 ###### Query:
     db.restaurants.find({cuisine: "Chinese", borough: "Queens"}).count();
@@ -470,7 +470,7 @@ Create the following indexes:
 }
     
 
-###  # **MongoDB Task2**
+MongoDB Task2
 
 1) How many records does each airline class have? Use $project to show result as { class: "Z", total: 999 }
 
@@ -547,23 +547,23 @@ first 3). Show result as { "_id": "<carrier>", "total": 999 }
         {
          $group: {
              _id: "$carrier",
-             totalPassengers : {$max : "$passengers"}
+             totalCount : {$max : "$passengers"}
          }         
      },
-     {$sort: {totalPassengers: -1}},
+     {$sort: {totalCount: -1}},
      {$limit: 10},
      {$skip: 3}
     ])
 
 ###### Result:
 
-{ "_id" : "Emirates", "totalPassengers" : 12144 }
-{ "_id" : "Air Europa", "totalPassengers" : 8086 }
-{ "_id" : "American Airlines Inc.", "totalPassengers" : 8065 }
-{ "_id" : "United Air Lines Inc.", "totalPassengers" : 7313 }
-{ "_id" : "Meridiana S.p.A", "totalPassengers" : 6173 }
-{ "_id" : "Norwegian Air Shuttle ASA", "totalPassengers" : 2381 }
-{ "_id" : "Atlas Air Inc.", "totalPassengers" : 85 }
+{ "_id" : "Emirates", "totalCount" : 12144 }
+{ "_id" : "Air Europa", "totalCount" : 8086 }
+{ "_id" : "American Airlines Inc.", "totalCount" : 8065 }
+{ "_id" : "United Air Lines Inc.", "totalCount" : 7313 }
+{ "_id" : "Meridiana S.p.A", "totalCount" : 6173 }
+{ "_id" : "Norwegian Air Shuttle ASA", "totalCount" : 2381 }
+{ "_id" : "Atlas Air Inc.", "totalCount" : 85 }
 
 5) Find the city (originCity) with the highest sum of passengers for each state (originState)
 of the United States (originCountry). Provide the city for the first 5 states ordered by state
@@ -572,7 +572,8 @@ alphabetically (you should see the city for Alaska, Arizona and etc). Show resul
 } }
 
 ###### Query:
-
-
-
-
+db.airlines.aggregate([
+        {
+                $match: {"originCountry": {$eq: "United States"}}
+        }
+])
