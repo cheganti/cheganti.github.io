@@ -567,13 +567,49 @@ first 3). Show result as { "_id": "<carrier>", "total": 999 }
 
 5) Find the city (originCity) with the highest sum of passengers for each state (originState)
 of the United States (originCountry). Provide the city for the first 5 states ordered by state
-alphabetically (you should see the city for Alaska, Arizona and etc). Show result as {
-"totalPassengers" : 999, "location" : { "state" : "abc", "city" : "xyz"
+alphabetically (you should see the city for Alaska, Arizona and etc). Show result as 
+{
+"totalPassengers" : 999, 
+"location" : { "state" : "abc", "city" : "xyz"
 } }
 
 ###### Query:
 db.airlines.aggregate([
-        {
-                $match: {"originCountry": {$eq: "United States"}}
+    {   
+        $match:{
+            originCountry: {$eq: "United States"}
         }
-])
+    },
+    {
+        $group: {
+            _id: {orgcity: "$originCity", orgstate: "$originState"},
+            sumOfPassengers : {$sum : "$passengers"}
+        }         
+    },     
+    {
+        $group: {
+            _id: {orgstate: "$_id.orgstate", orgcity: "$_id.orgcity"},
+            totalPassengers : {$sum: "$sumOfPassengers"}
+        }         
+    },
+    {
+        $sort: { _id: 1} 
+    },   
+    {
+            $project: {totalPassengers: "$totalPassengers", _id: 0, location: "$_id"}
+    },
+    {
+        $limit: 5
+    } 
+]) 
+
+###### Result:
+
+
+{ "totalPassengers" : 295, "location" : { "state" : "Alabama", "city" : "Anniston, AL" } }
+{ "totalPassengers" : 30, "location" : { "state" : "Alabama", "city" : "Auburn, AL" } }
+{ "totalPassengers" : 760120, "location" : { "state" : "Alabama", "city" : "Birmingham, AL" } }
+{ "totalPassengers" : 0, "location" : { "state" : "Alabama", "city" : "Decatur, AL" } }
+{ "totalPassengers" : 27241, "location" : { "state" : "Alabama", "city" : "Dothan, AL" } }
+
+
