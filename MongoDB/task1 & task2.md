@@ -95,172 +95,140 @@ Create the following indexes:
 3) Create an index to make this query covered and provide proof (from explain() or Compass UI) that it is
 	indeed covered:
 ###### Query:
-    db.restaurants.createIndex({"restaurant_id": 41098650})  
-    {
-        "numIndexesBefore" : 4,
-        "numIndexesAfter" : 4,
-        "note" : "all indexes already exist",
-        "ok" : 1
-    }  
+   db.restaurants.createIndex({"restaurant_id": 1})
+        {
+                "createdCollectionAutomatically" : false,
+                "numIndexesBefore" : 1,
+                "numIndexesAfter" : 2,
+                "ok" : 1
+        }
 
-     db.restaurants.find({ restaurant_id: "41098650" }, { _id: 0, borough: 1 }).explain("executionStats")
+    db.restaurants.find({ restaurant_id: "41098650" }, { _id: 0, borough: 1 }).explain("executionStats")
 {
-        "queryPlanner" : {
-                "plannerVersion" : 1,
-                "namespace" : "frontcamp.restaurants",
-                "indexFilterSet" : false,
-                "parsedQuery" : {
-                        "restaurant_id" : {
-                                "$eq" : "41098650"
-                        }
-                },
-                "winningPlan" : {
-                        "stage" : "PROJECTION",
-                        "transformBy" : {
-                                "_id" : 0,
-                                "borough" : 1
-                        },
-                        "inputStage" : {
-                                "stage" : "FETCH",
-                                "inputStage" : {
-                                        "stage" : "IXSCAN",
-                                        "keyPattern" : {
-                                                "restaurant_id" : 41098650
-                                        },
-                                        "indexName" : "restaurant_id_41098650",
-                                        "isMultiKey" : false,
-                                        "multiKeyPaths" : {
-                                                "restaurant_id" : [ ]
-                                        },
-                                        "isUnique" : false,
-                                        "isSparse" : false,
-                                        "isPartial" : false,
-                                        "indexVersion" : 2,
-                                        "direction" : "forward",
-                                        "indexBounds" : {
-                                                "restaurant_id" : [
-                                                        "[\"41098650\", \"41098650\"]"
-                                                ]
-                                        }
-                                }
-                        }
-                },
-                "rejectedPlans" : [
-                        {
-                                "stage" : "PROJECTION",
-                                "transformBy" : {
-                                        "_id" : 0,
-                                        "borough" : 1
-                                },
-                                "inputStage" : {
-                                        "stage" : "FETCH",
-                                        "inputStage" : {
-                                                "stage" : "IXSCAN",
-                                                "keyPattern" : {
-                                                        "restaurant_id" : 1
-                                                },
-                                                "indexName" : "restaurant_id_1",
-                                                "isMultiKey" : false,
-                                                "multiKeyPaths" : {
-                                                        "restaurant_id" : [ ]
-                                                },
-                                                "isUnique" : false,
-                                                "isSparse" : false,
-                                                "isPartial" : false,
-                                                "indexVersion" : 2,
-                                                "direction" : "forward",
-                                                "indexBounds" : {
-                                                        "restaurant_id" : [
-                                                                "[\"41098650\", \"41098650\"]"
-                                                        ]
-                                                }
-                                        }
-                                }
-                        }
-                ]
-        },
-        "executionStats" : {
-                "executionSuccess" : true,
-                "nReturned" : 1,
-                "executionTimeMillis" : 16,
-                "totalKeysExamined" : 1,
-                "totalDocsExamined" : 1,
-                "executionStages" : {
-                        "stage" : "PROJECTION",
-                        "nReturned" : 1,
-                        "executionTimeMillisEstimate" : 0,
-                        "works" : 3,
-                        "advanced" : 1,
-                        "needTime" : 0,
-                        "needYield" : 0,
-                        "saveState" : 0,
-                        "restoreState" : 0,
-                        "isEOF" : 1,
-                        "invalidates" : 0,
-                        "transformBy" : {
-                                "_id" : 0,
-                                "borough" : 1
-                        },
-                        "inputStage" : {
-                                "stage" : "FETCH",
-                                "nReturned" : 1,
-                                "executionTimeMillisEstimate" : 0,
-                                "works" : 3,
-                                "advanced" : 1,
-                                "needTime" : 0,
-                                "needYield" : 0,
-                                "saveState" : 0,
-                                "restoreState" : 0,
-                                "isEOF" : 1,
-                                "invalidates" : 0,
-                                "docsExamined" : 1,
-                                "alreadyHasObj" : 0,
-                                "inputStage" : {
-                                        "stage" : "IXSCAN",
-                                        "nReturned" : 1,
-                                        "executionTimeMillisEstimate" : 0,
-                                        "works" : 2,
-                                        "advanced" : 1,
-                                        "needTime" : 0,
-                                        "needYield" : 0,
-                                        "saveState" : 0,
-                                        "restoreState" : 0,
-                                        "isEOF" : 1,
-                                        "invalidates" : 0,
-                                        "keyPattern" : {
-                                                "restaurant_id" : 41098650
-                                        },
-                                        "indexName" : "restaurant_id_41098650",
-                                        "isMultiKey" : false,
-                                        "multiKeyPaths" : {
-                                                "restaurant_id" : [ ]
-                                        },
-                                        "isUnique" : false,
-                                        "isSparse" : false,
-                                        "isPartial" : false,
-                                        "indexVersion" : 2,
-                                        "direction" : "forward",
-                                        "indexBounds" : {
-                                                "restaurant_id" : [
-                                                        "[\"41098650\", \"41098650\"]"
-                                                ]
-                                        },
-                                        "keysExamined" : 1,
-                                        "seeks" : 1,
-                                        "dupsTested" : 0,
-                                        "dupsDropped" : 0,
-                                        "seenInvalidated" : 0
-                                }
-                        }
-                }
-        },
-        "serverInfo" : {
-                "host" : "EPINHYDW0185",
-                "port" : 27017,
-                "version" : "4.0.9",
-                "gitVersion" : "fc525e2d9b0e4bceff5c2201457e564362909765"
-        },
-        "ok" : 1
+    "queryPlanner" : {
+            "plannerVersion" : 1,
+            "namespace" : "frontcamp.restaurants",
+            "indexFilterSet" : false,
+            "parsedQuery" : {
+                    "restaurant_id" : {
+                            "$eq" : "41098650"
+                    }
+            },
+            "winningPlan" : {
+                    "stage" : "PROJECTION",
+                    "transformBy" : {
+                            "_id" : 0,
+                            "borough" : 1
+                    },
+                    "inputStage" : {
+                            "stage" : "FETCH",
+                            "inputStage" : {
+                                    "stage" : "IXSCAN",
+                                    "keyPattern" : {
+                                            "restaurant_id" : 41098650
+                                    },
+                                    "indexName" : "restaurant_id_41098650",
+                                    "isMultiKey" : false,
+                                    "multiKeyPaths" : {
+                                            "restaurant_id" : [ ]
+                                    },
+                                    "isUnique" : false,
+                                    "isSparse" : false,
+                                    "isPartial" : false,
+                                    "indexVersion" : 2,
+                                    "direction" : "forward",
+                                    "indexBounds" : {
+                                            "restaurant_id" : [
+                                                    "[\"41098650\", \"41098650\"]"
+                                            ]
+                                    }
+                            }
+                    }
+            },
+            "rejectedPlans" : [ ]
+    },
+    "executionStats" : {
+            "executionSuccess" : true,
+            "nReturned" : 1,
+            "executionTimeMillis" : 1,
+            "totalKeysExamined" : 1,
+            "totalDocsExamined" : 1,
+            "executionStages" : {
+                    "stage" : "PROJECTION",
+                    "nReturned" : 1,
+                    "executionTimeMillisEstimate" : 0,
+                    "works" : 2,
+                    "advanced" : 1,
+                    "needTime" : 0,
+                    "needYield" : 0,
+                    "saveState" : 0,
+                    "restoreState" : 0,
+                    "isEOF" : 1,
+                    "invalidates" : 0,
+                    "transformBy" : {
+                            "_id" : 0,
+                            "borough" : 1
+                    },
+                    "inputStage" : {
+                            "stage" : "FETCH",
+                            "nReturned" : 1,
+                            "executionTimeMillisEstimate" : 0,
+                            "works" : 2,
+                            "advanced" : 1,
+                            "needTime" : 0,
+                            "needYield" : 0,
+                            "saveState" : 0,
+                            "restoreState" : 0,
+                            "isEOF" : 1,
+                            "invalidates" : 0,
+                            "docsExamined" : 1,
+                            "alreadyHasObj" : 0,
+                            "inputStage" : {
+                                    "stage" : "IXSCAN",
+                                    "nReturned" : 1,
+                                    "executionTimeMillisEstimate" : 0,
+                                    "works" : 2,
+                                    "advanced" : 1,
+                                    "needTime" : 0,
+                                    "needYield" : 0,
+                                    "saveState" : 0,
+                                    "restoreState" : 0,
+                                    "isEOF" : 1,
+                                    "invalidates" : 0,
+                                    "keyPattern" : {
+                                            "restaurant_id" : 41098650
+                                    },
+                                    "indexName" : "restaurant_id_41098650",
+                                    "isMultiKey" : false,
+                                    "multiKeyPaths" : {
+                                            "restaurant_id" : [ ]
+                                    },
+                                    "isUnique" : false,
+                                    "isSparse" : false,
+                                    "isPartial" : false,
+                                    "indexVersion" : 2,
+                                    "direction" : "forward",
+                                    "indexBounds" : {
+                                            "restaurant_id" : [
+                                                    "[\"41098650\", \"41098650\"]"
+                                            ]
+                                    },
+                                    "keysExamined" : 1,
+                                    "seeks" : 1,
+                                    "dupsTested" : 0,
+                                    "dupsDropped" : 0,
+                                    "seenInvalidated" : 0
+                            }
+                    }
+            }
+    },
+    "serverInfo" : {
+            "host" : "EPINHYDW0295",
+            "port" : 27017,
+            "version" : "4.0.9",
+            "gitVersion" : "fc525e2d9b0e4bceff5c2201457e564362909765"
+    },
+    "ok" : 1
 }
 
 4) Create a partial index on cuisine field which will be used only when filtering on borough equal to “Staten
