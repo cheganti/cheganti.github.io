@@ -504,34 +504,36 @@ first 3). Show result as { "_id": "<carrier>", "total": 999 }
 
 ###### Query:
 
- db.airlines.aggregate([
-        {   
-        $match:{"$and":[       
-        {"$or":[         
-        {"destCountry":"Greece"},         
-        {"destCountry":"Italy"},         
-        {"destCountry":"Spain"}]},       
-        {"originCountry":"United States"}]}},
-        {
-         $group: {
-             _id: "$carrier",
-             totalCount : {$max : "$passengers"}
-         }         
-     },
-     {$sort: {totalCount: -1}},
-     {$limit: 10},
-     {$skip: 3}
+    db.airlines.aggregate([
+    {
+        $match:{'originCountry': { $eq: 'United States' },'destCountry': {$in:[ 'Greece','Italy','Spain']}}
+    },
+    {
+        $group:{'_id': '$carrier','passengers': { $sum: '$passengers' }} 
+    },
+    {
+        $project:{_id:'$_id',totalCount: '$passengers'}
+    },
+    {
+        $sort:{totalCount: -1}
+    },
+    {
+        $limit: 10
+    },
+    {
+        $skip: 3
+    }
     ])
 
 ###### Result:
 
-{ "_id" : "Emirates", "totalCount" : 12144 }
-{ "_id" : "Air Europa", "totalCount" : 8086 }
-{ "_id" : "American Airlines Inc.", "totalCount" : 8065 }
-{ "_id" : "United Air Lines Inc.", "totalCount" : 7313 }
-{ "_id" : "Meridiana S.p.A", "totalCount" : 6173 }
-{ "_id" : "Norwegian Air Shuttle ASA", "totalCount" : 2381 }
-{ "_id" : "Atlas Air Inc.", "totalCount" : 85 }
+{ "_id" : "Compagnia Aerea Italiana", "totalCount" : 280256 }
+{ "_id" : "United Air Lines Inc.", "totalCount" : 229936 }
+{ "_id" : "Emirates", "totalCount" : 100903 }
+{ "_id" : "Air Europa", "totalCount" : 94968 }
+{ "_id" : "Meridiana S.p.A", "totalCount" : 20308 }
+{ "_id" : "Norwegian Air Shuttle ASA", "totalCount" : 13344 }
+{ "_id" : "VistaJet Limited", "totalCount" : 183 }
 
 5) Find the city (originCity) with the highest sum of passengers for each state (originState)
 of the United States (originCountry). Provide the city for the first 5 states ordered by state
@@ -545,39 +547,47 @@ alphabetically (you should see the city for Alaska, Arizona and etc). Show resul
 db.airlines.aggregate([
     {   
         $match:{
-            originCountry: {$eq: "United States"}
+            'originCountry': {$eq: "United States"}
         }
     },
     {
         $group: {
-            _id: {orgcity: "$originCity", orgstate: "$originState"},
-            sumOfPassengers : {$sum : "$passengers"}
+            _id: {
+                    orgcity: "$originCity", 
+                    orgstate: "$originState"
+                    },
+            'sumOfPassengers' : {$sum : "$passengers"}
         }         
     },     
     {
         $group: {
-            _id: {orgstate: "$_id.orgstate", orgcity: "$_id.orgcity"},
-            totalPassengers : {$sum: "$sumOfPassengers"}
-        }         
+                '_id': '$_id.orgstate', 
+                'location': { $mergeObjects: '$_id'},
+                totalPassengers : {$max: "$sumOfPassengers"}
+        }       
     },
     {
-        $sort: { _id: 1} 
-    },   
+        $project:{
+            _id:0,
+            totalPassengers: 1,
+            state: '$location.orgstate',
+            city: '$location.orgcity' 
+        }
+    },
     {
-            $project: {totalPassengers: "$totalPassengers", _id: 0, location: "$_id"}
+        $sort:{
+            'state': 1
+        }
     },
     {
         $limit: 5
-    } 
+    }
 ]) 
 
 ###### Result:
 
-
-{ "totalPassengers" : 295, "location" : { "state" : "Alabama", "city" : "Anniston, AL" } }
-{ "totalPassengers" : 30, "location" : { "state" : "Alabama", "city" : "Auburn, AL" } }
-{ "totalPassengers" : 760120, "location" : { "state" : "Alabama", "city" : "Birmingham, AL" } }
-{ "totalPassengers" : 0, "location" : { "state" : "Alabama", "city" : "Decatur, AL" } }
-{ "totalPassengers" : 27241, "location" : { "state" : "Alabama", "city" : "Dothan, AL" } }
-
-
+{ "totalPassengers" : 760120, "state" : "Alabama", "city" : "Birmingham, AL" }
+{ "totalPassengers" : 1472404, "state" : "Alaska", "city" : "Anchorage, AK" }
+{ "totalPassengers" : 13152753, "state" : "Arizona", "city" : "Tucson, AZ" }
+{ "totalPassengers" : 571452, "state" : "Arkansas", "city" : "El Dorado, AR" }
+{ "totalPassengers" : 23701556, "state" : "California", "city" : "Fresno, CA" }
