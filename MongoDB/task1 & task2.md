@@ -605,7 +605,7 @@ of (sender, recipient) pairs.
 Which pair of people have the greatest number of messages in the dataset?
 For you reference the number of messages from phillip.love@enron.co to sladanaanna.kulic@enron.com is 144.
 
-###### Result:
+###### Query:
  db.enron.aggregate([
     {
          $unwind: "$headers.To"
@@ -640,3 +640,6 @@ For you reference the number of messages from phillip.love@enron.co to sladanaan
          $limit: 1
      }
  ])
+ 
+ ###### Result:
+ { "_id" : { "sender" : "susan.mara@enron.com", "recipient" : "jeff.dasovich@enron.com" }, "count" : 750 }
