@@ -591,3 +591,40 @@ db.airlines.aggregate([
 { "totalPassengers" : 13152753, "state" : "Arizona", "city" : "Tucson, AZ" }
 { "totalPassengers" : 571452, "state" : "Arkansas", "city" : "El Dorado, AR" }
 { "totalPassengers" : 23701556, "state" : "California", "city" : "Fresno, CA" }
+
+
+###### Aggregate Enron Collection
+ db.enron.aggregate([
+    {
+         $unwind: "$headers.To"
+     },
+     {
+         $group: {
+             _id: {
+                 id: "$_id",
+                 from: "$headers.From"
+             },
+             ToList: { $addToSet: "$headers.To" }
+         }
+     },
+     {
+         $unwind: "$ToList"
+     },
+     {
+         $group: {
+             _id: {
+                 sender: "$_id.from",
+                 recipient: "$ToList"
+             },
+             count: { $sum: 1 }
+         }
+     },
+     {
+         $sort: {
+             count: -1
+         }
+     },
+     {
+         $limit: 1
+     }
+ ])
