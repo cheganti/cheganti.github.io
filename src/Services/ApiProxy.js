@@ -1,4 +1,3 @@
-import  api  from './GetApi';
 class ApiProxy {
     constructor(api) {
      this.api = api;
